@@ -46,6 +46,7 @@
     <color name="red_200">#FECACA</color>
     <color name="orange_300">#FDBA74</color>
     <color name="yellow_200">#FEF08A</color>
+    <color name="yellow_300">#FDE047</color>
     
     <!-- Launcher icon colors -->
     <color name="ic_launcher_background">#F97316</color>
