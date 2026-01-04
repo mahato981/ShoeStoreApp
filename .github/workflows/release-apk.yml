@@ -1,0 +1,84 @@
+name: Release APK
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+        
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Extract version from tag
+      id: get_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug
+      
+    - name: Rename APK
+      run: |
+        mv app/build/outputs/apk/debug/app-debug.apk \
+           app/build/outputs/apk/debug/ShoeStore-${{ steps.get_version.outputs.VERSION }}-debug.apk
+    
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ steps.get_version.outputs.VERSION }}
+        body: |
+          ## Shoe Store Management App - ${{ steps.get_version.outputs.VERSION }}
+          
+          ### 📱 Download APK
+          Download the APK file below and install on your Android device.
+          
+          ### ✨ Features
+          - 36 pre-loaded products
+          - Offline SQLite database
+          - Search and filter functionality
+          - Shopping cart with checkout
+          - Add/Edit products
+          - Beautiful gradient UI
+          
+          ### 📋 Requirements
+          - Android 7.0 (API 24) or higher
+          - ~15 MB storage space
+          
+          ### 🚀 Installation
+          1. Download the APK file
+          2. Enable "Install from Unknown Sources" in Android settings
+          3. Open the downloaded APK file
+          4. Follow installation prompts
+          
+          ### 🔄 What's New
+          See CHANGELOG.md for detailed changes.
+        draft: false
+        prerelease: false
+        
+    - name: Upload Release APK
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: app/build/outputs/apk/debug/ShoeStore-${{ steps.get_version.outputs.VERSION }}-debug.apk
+        asset_name: ShoeStore-${{ steps.get_version.outputs.VERSION }}-debug.apk
+        asset_content_type: application/vnd.android.package-archive

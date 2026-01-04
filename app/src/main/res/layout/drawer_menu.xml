@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/slate_800"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/avatar_bg"
+            android:gravity="center"
+            android:text="👤"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/admin"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Manage Store Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/manage_store"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/gray_900"
+                android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:id="@+id/menuAddProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_item_bg"
+                android:text="@string/add_products"
+                android:textAlignment="textStart"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_900"/>
+
+            <Button
+                android:id="@+id/menuEditProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_item_bg"
+                android:text="@string/edit_products"
+                android:textAlignment="textStart"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_900"/>
+
+            <Button
+                android:id="@+id/menuAddMainCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_item_bg"
+                android:text="@string/add_main_category"
+                android:textAlignment="textStart"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_900"/>
+
+            <Button
+                android:id="@+id/menuAddSubCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_item_bg"
+                android:text="@string/add_sub_category"
+                android:textAlignment="textStart"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_900"/>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_200"
+                android:layout_marginVertical="16dp"/>
+
+            <!-- Database Management Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/database_management"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/gray_900"
+                android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:id="@+id/menuBackup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_item_bg"
+                android:text="@string/backup"
+                android:textAlignment="textStart"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_900"/>
+
+            <Button
+                android:id="@+id/menuRestore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_item_bg"
+                android:text="@string/restore"
+                android:textAlignment="textStart"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_900"/>
+
+            <Button
+                android:id="@+id/menuAutoBackup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_item_bg"
+                android:text="@string/automatic_backup"
+                android:textAlignment="textStart"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_900"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

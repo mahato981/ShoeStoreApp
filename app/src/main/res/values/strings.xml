@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Shoe Store</string>
+    
+    <!-- Header -->
+    <string name="search_hint">Search for shoes…</string>
+    
+    <!-- Categories -->
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="kids">Kids</string>
+    
+    <!-- Menu -->
+    <string name="admin">Admin</string>
+    <string name="manage_store">Manage Store</string>
+    <string name="add_products">Add Products</string>
+    <string name="edit_products">Edit Products</string>
+    <string name="add_main_category">Add Main Category</string>
+    <string name="add_sub_category">Add Sub Category</string>
+    <string name="database_management">Database Management</string>
+    <string name="backup">Backup</string>
+    <string name="restore">Restore</string>
+    <string name="automatic_backup">Automatic Backup</string>
+    
+    <!-- Filters -->
+    <string name="filters">Filters</string>
+    <string name="main_category">Main Category</string>
+    <string name="sub_category">Sub Category</string>
+    <string name="size">Size</string>
+    <string name="clear">Clear</string>
+    <string name="apply_filters">Apply Filters</string>
+    <string name="select_category_first">Select a category first</string>
+    <string name="results">%d Results</string>
+    
+    <!-- Cart -->
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="your_cart_empty">Your cart is empty</string>
+    <string name="remove">Remove</string>
+    <string name="total">Total</string>
+    <string name="proceed_checkout">Proceed to Checkout</string>
+    
+    <!-- Product Detail -->
+    <string name="box_number">Box Number: #%s</string>
+    <string name="code">Code: %s</string>
+    <string name="location">Location: Shelf %d, Row %d</string>
+    <string name="description">Description</string>
+    <string name="select_size">Select Size</string>
+    <string name="available_sizes">Available Sizes</string>
+    <string name="add_to_cart_size">Add to Cart - Size %d</string>
+    <string name="select_a_size">Select a Size</string>
+    
+    <!-- Checkout -->
+    <string name="checkout">Checkout</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="payment">Payment</string>
+    <string name="enter_amount">Enter Amount to Pay</string>
+    <string name="enter_amount_hint">Enter amount</string>
+    <string name="show_min_price">Show Minimum Price Required</string>
+    <string name="min_amount_required">Minimum Amount Required:</string>
+    <string name="total_amount">Total Amount:</string>
+    <string name="sold">Sold</string>
+    <string name="rupee_symbol">₹</string>
+    
+    <!-- Add/Edit Product -->
+    <string name="add_new_product">Add New Product</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="select_product_edit">Select Product to Edit</string>
+    <string name="product_images">Product Images (Emojis)</string>
+    <string name="product_images_desc">Add 3 product emojis. First one is default for product card.</string>
+    <string name="image_default">Image %d (Default)</string>
+    <string name="image_number">Image %d</string>
+    <string name="emoji_hint">Enter emoji (e.g., 👟)</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_name_hint">e.g., Nike Air Max | Running Shoes | Nike</string>
+    <string name="select_category">Select Category</string>
+    <string name="sub_category_hint">e.g., Sports Shoes</string>
+    <string name="original_price">Original Price (₹)</string>
+    <string name="discount_price">Discount Price (₹)</string>
+    <string name="minimum_price">Minimum Price (₹)</string>
+    <string name="available_sizes_label">Available Sizes</string>
+    <string name="selected_sizes">Selected: %s</string>
+    <string name="selected_none">None</string>
+    <string name="shelf_number">Shelf Number</string>
+    <string name="row_number">Row Number</string>
+    <string name="box_number_label">Box Number</string>
+    <string name="code_label">Code</string>
+    <string name="description_label">Description</string>
+    <string name="description_hint">Premium quality shoes designed for comfort and style…</string>
+    <string name="add_product">Add Product</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="cancel">Cancel</string>
+    <string name="back_to_list">Back to List</string>
+    <string name="back">← Back</string>
+</resources>
