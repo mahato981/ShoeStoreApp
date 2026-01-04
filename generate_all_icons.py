@@ -1,35 +1,88 @@
 #!/usr/bin/env python3
+"""
+Generate proper launcher icons for Android without external dependencies.
+Creates valid PNG files with proper structure and CRC checksums.
+"""
 import os
+import zlib
 import struct
 
-def create_png(width, height, color_rgb):
-    """Create a simple PNG file with solid color"""
+def create_png(width, height, color_rgba=(249, 115, 22, 255)):
+    """Create a valid PNG file with solid color"""
     # PNG signature
     signature = b'\x89PNG\r\n\x1a\n'
     
-    # IHDR chunk (image header)
-    ihdr_data = struct.pack('>IIBBBBB', width, height, 8, 2, 0, 0, 0)  # RGB color
-    ihdr_chunk = b'IHDR' + ihdr_data
-    ihdr_crc = struct.pack('>I', 0x00000000)  # Simplified CRC
-    ihdr = struct.pack('>I', len(ihdr_data)) + ihdr_chunk + ihdr_crc
+    def create_chunk(chunk_type, data):
+        """Create a PNG chunk with proper CRC"""
+        chunk = chunk_type + data
+        crc = zlib.crc32(chunk) & 0xffffffff
+        return struct.pack('>I', len(data)) + chunk + struct.pack('>I', crc)
     
-    # IDAT chunk (image data) - create solid color
-    pixel_data = bytes(color_rgb) * width * height
-    idat_data = b'\x00' * height  # Filter bytes
-    idat_chunk = b'IDAT' + idat_data + pixel_data
-    idat_crc = struct.pack('>I', 0x00000000)  # Simplified CRC
-    idat = struct.pack('>I', len(idat_data) + len(pixel_data)) + idat_chunk + idat_crc
+    # IHDR chunk (image header) - RGBA color type
+    ihdr_data = struct.pack('>IIBBBBB', width, height, 8, 6, 0, 0, 0)  # 6 = RGBA
+    ihdr = create_chunk(b'IHDR', ihdr_data)
+    
+    # Create image data (solid color)
+    rows = []
+    for y in range(height):
+        # Filter type 0 (None) at start of each row
+        row = b'\x00' + (bytes(color_rgba) * width)
+        rows.append(row)
+    
+    raw_data = b''.join(rows)
+    compressed_data = zlib.compress(raw_data, 9)
+    
+    # IDAT chunk (image data)
+    idat = create_chunk(b'IDAT', compressed_data)
     
     # IEND chunk
-    iend = struct.pack('>I', 0) + b'IEND' + struct.pack('>I', 0xAE426082)
+    iend = create_chunk(b'IEND', b'')
     
-    # For simplicity, use a base64 encoded tiny transparent PNG
-    import base64
-    # 1x1 orange pixel PNG
-    orange_png = base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8j4HwAFBQIB6yz7SgAAAABJRU5ErkJggg==')
-    return orange_png
+    # Combine all chunks
+    return signature + ihdr + idat + iend
 
-# Define sizes
+def create_round_icon_png(width, height, color_rgba=(249, 115, 22, 255)):
+    """Create a round icon (circle with transparency)"""
+    signature = b'\x89PNG\r\n\x1a\n'
+    
+    def create_chunk(chunk_type, data):
+        chunk = chunk_type + data
+        crc = zlib.crc32(chunk) & 0xffffffff
+        return struct.pack('>I', len(data)) + chunk + struct.pack('>I', crc)
+    
+    ihdr_data = struct.pack('>IIBBBBB', width, height, 8, 6, 0, 0, 0)
+    ihdr = create_chunk(b'IHDR', ihdr_data)
+    
+    # Create circular icon
+    rows = []
+    center_x = width / 2
+    center_y = height / 2
+    radius = min(width, height) / 2
+    
+    for y in range(height):
+        row_data = b'\x00'  # Filter type
+        for x in range(width):
+            # Calculate distance from center
+            dx = x - center_x + 0.5
+            dy = y - center_y + 0.5
+            distance = (dx * dx + dy * dy) ** 0.5
+            
+            if distance <= radius:
+                # Inside circle - use color
+                row_data += bytes(color_rgba)
+            else:
+                # Outside circle - transparent
+                row_data += bytes([0, 0, 0, 0])
+        rows.append(row_data)
+    
+    raw_data = b''.join(rows)
+    compressed_data = zlib.compress(raw_data, 9)
+    idat = create_chunk(b'IDAT', compressed_data)
+    iend = create_chunk(b'IEND', b'')
+    
+    return signature + ihdr + idat + iend
+
+# Define sizes for different density folders
 sizes = {
     'mipmap-mdpi': 48,
     'mipmap-hdpi': 72,
@@ -38,21 +91,36 @@ sizes = {
     'mipmap-xxxhdpi': 192
 }
 
-# Orange color
-orange = (249, 115, 22)
+# Orange color (RGB + Alpha)
+orange_rgba = (249, 115, 22, 255)
+
+print("Generating Android launcher icons...")
+print("=" * 50)
 
 for folder, size in sizes.items():
     folder_path = f"app/src/main/res/{folder}"
     os.makedirs(folder_path, exist_ok=True)
     
-    # Create icons
-    icon_data = create_png(size, size, orange)
+    # Create square launcher icon
+    icon_data = create_png(size, size, orange_rgba)
+    icon_path = os.path.join(folder_path, 'ic_launcher.png')
+    with open(icon_path, 'wb') as f:
+        f.write(icon_data)
+    print(f"✅ Created {icon_path} ({size}x{size}px, {len(icon_data)} bytes)")
     
-    for icon_name in ['ic_launcher.png', 'ic_launcher_round.png', 'ic_launcher_foreground.png']:
-        icon_path = os.path.join(folder_path, icon_name)
-        with open(icon_path, 'wb') as f:
-            f.write(icon_data)
+    # Create round launcher icon
+    round_icon_data = create_round_icon_png(size, size, orange_rgba)
+    round_icon_path = os.path.join(folder_path, 'ic_launcher_round.png')
+    with open(round_icon_path, 'wb') as f:
+        f.write(round_icon_data)
+    print(f"✅ Created {round_icon_path} ({size}x{size}px, {len(round_icon_data)} bytes)")
     
-    print(f"✅ Created icons for {folder}")
+    # Create foreground icon (same as regular for now)
+    fg_icon_path = os.path.join(folder_path, 'ic_launcher_foreground.png')
+    with open(fg_icon_path, 'wb') as f:
+        f.write(icon_data)
+    print(f"✅ Created {fg_icon_path} ({size}x{size}px, {len(icon_data)} bytes)")
+    print()
 
-print("\n✅ All launcher icons created!")
+print("=" * 50)
+print("✅ All launcher icons generated successfully!")
