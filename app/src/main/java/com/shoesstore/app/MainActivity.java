@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private ProductAdapter productAdapter;
     private EditText searchInput;
     private TextView resultsText, cartBadge, filterBadge;
-    private ImageView menuIcon, cartIcon;
-    private FrameLayout filterButton;
+    private ImageView menuIcon;
+    private FrameLayout cartIcon, filterButton;
     
     private DatabaseHelper database;
     private List<Product> allProducts;

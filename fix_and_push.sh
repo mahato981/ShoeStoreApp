@@ -21,7 +21,7 @@ echo ""
 
 # Commit
 echo "💾 Committing changes..."
-git commit -m "Fix lint error: Change TextView to ImageView for menuIcon in EditProductsActivity"
+git commit -m "Fix lint errors: WrongViewCast issues in EditProductsActivity and MainActivity"
 
 # Push
 echo ""
