@@ -8,7 +8,7 @@ echo ""
 if [ -n "$(git status --porcelain)" ]; then
     echo "📝 Changes detected, committing..."
     git add .
-    git commit -m "Add launcher icons and fix build issues"
+    git commit -m "Fix lint error: Change TextView to ImageView for menuIcon in EditProductsActivity"
 else
     echo "✅ No new changes to commit"
 fi

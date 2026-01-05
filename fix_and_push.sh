@@ -21,7 +21,7 @@ echo ""
 
 # Commit
 echo "💾 Committing changes..."
-git commit -m "Add all project files: workflows, documentation, and resources"
+git commit -m "Fix lint error: Change TextView to ImageView for menuIcon in EditProductsActivity"
 
 # Push
 echo ""

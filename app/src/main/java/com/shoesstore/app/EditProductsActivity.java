@@ -1,7 +1,7 @@
 package com.shoesstore.app;
 
 import android.os.Bundle;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -22,7 +22,7 @@ public class EditProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Reuse main layout for product selection
         
-        TextView backButton = findViewById(R.id.menuIcon);
+        ImageView backButton = findViewById(R.id.menuIcon);
         backButton.setOnClickListener(v -> finish());
         
         database = DatabaseHelper.getInstance(this);
