@@ -8,7 +8,7 @@ echo ""
 if [ -n "$(git status --porcelain)" ]; then
     echo "📝 Changes detected, committing..."
     git add .
-    git commit -m "Fix lint errors: WrongViewCast issues in EditProductsActivity and MainActivity"
+    git commit -m "Fix all lint errors: WrongViewCast and WrongConstant issues in MainActivity and EditProductsActivity"
 else
     echo "✅ No new changes to commit"
 fi

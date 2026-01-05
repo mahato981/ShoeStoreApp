@@ -21,7 +21,7 @@ echo ""
 
 # Commit
 echo "💾 Committing changes..."
-git commit -m "Fix lint errors: WrongViewCast issues in EditProductsActivity and MainActivity"
+git commit -m "Fix all lint errors: WrongViewCast and WrongConstant issues in MainActivity and EditProductsActivity"
 
 # Push
 echo ""

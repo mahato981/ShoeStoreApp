@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
+import androidx.core.view.GravityCompat;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -291,9 +292,9 @@ public class MainActivity extends AppCompatActivity {
         );
         
         if (drawer == menuDrawer) {
-            params.gravity = Gravity.START;
+            params.gravity = GravityCompat.START;
         } else {
-            params.gravity = Gravity.END;
+            params.gravity = GravityCompat.END;
         }
         
         drawer.setLayoutParams(params);
@@ -305,9 +306,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addView(drawer);
         
         if (drawer == menuDrawer) {
-            drawerLayout.openDrawer(Gravity.START);
+            drawerLayout.openDrawer(GravityCompat.START);
         } else {
-            drawerLayout.openDrawer(Gravity.END);
+            drawerLayout.openDrawer(GravityCompat.END);
         }
     }
     
@@ -330,7 +331,7 @@ public class MainActivity extends AppCompatActivity {
     
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(Gravity.START) || drawerLayout.isDrawerOpen(Gravity.END)) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START) || drawerLayout.isDrawerOpen(GravityCompat.END)) {
             closeAllDrawers();
         } else {
             super.onBackPressed();
